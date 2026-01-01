@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Management System - Admin Dashboard</title>
+    <link rel="icon" href="./image1.png">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="admin.css">
+
+    <!-- React CDNs -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="main.html">
+                <i class="fas fa-car"></i> Car Rental Management System Admin
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard-section">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#manage-cars-section">Manage Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#manage-bookings-section">Manage Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="main.html">Main Site</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link user-info">
+                            <i class="fas fa-user-shield me-1"></i>
+                            <span id="adminName">Admin</span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <button id="btnLogout" class="btn btn-outline-light ms-2">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Dashboard -->
+    <div class="container-fluid mt-5 pt-4">
+        <div class="row">
+            <!-- Main Content -->
+            <main class="col-12 px-md-4 py-4">
+                <!-- React Component Container -->
+                <div id="react-promo-root" class="mb-4"></div>
+                
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="admin-section">
+                    <h2 class="mb-4"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h2>
+                    <!-- Dashboard Stats -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card bg-custom-blue mb-3">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2">Total Cars</h6>
+                                    <h2 class="card-text fw-bold" id="total-cars">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-custom-green mb-3">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2">Available Cars</h6>
+                                    <h2 class="card-text fw-bold" id="available-cars">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-custom-cyan mb-3">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2">Total Bookings</h6>
+                                    <h2 class="card-text fw-bold" id="total-bookings">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-custom-orange mb-3">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2">Active Bookings</h6>
+                                    <h2 class="card-text fw-bold" id="active-bookings">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Car List -->
+                    <div class="card shadow-sm mb-5">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0"><i class="fas fa-list me-2"></i>Cars Inventory</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Car Name</th>
+                                            <th>Brand</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dashboard-cars-list">
+                                        <!-- Cars will be loaded here by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Manage Cars Section -->
+                <section id="manage-cars-section" class="admin-section d-none">
+                    <h2 class="mb-4"><i class="fas fa-car me-2"></i>Manage Cars</h2>
+                    
+                    <!-- Car Form -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Add/Edit Car</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="car-form">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="carModel" class="form-label">Car Model</label>
+                                        <input type="text" class="form-control" id="carModel" placeholder="Enter car model" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="carBrand" class="form-label">Brand</label>
+                                        <input type="text" class="form-control" id="carBrand" placeholder="Enter brand" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="carYear" class="form-label">Year</label>
+                                        <input type="number" class="form-control" id="carYear" min="2000" max="2025" placeholder="Enter year" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="carPrice" class="form-label">Price Per Day (Br)</label>
+                                        <input type="number" class="form-control" id="carPrice" min="1" step="0.01" placeholder="Enter price per day" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="carImage" class="form-label">Image URL</label>
+                                    <input type="url" class="form-control" id="carImage" placeholder="Paste image URL here">
+                                    <div class="form-text">Leave empty to use default car image</div>
+                                </div>
+                                
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-plus-circle me-1"></i>Add Car
+                                    </button>
+                                    <button type="button" class="btn btn-warning" id="update-car-btn" disabled>
+                                        <i class="fas fa-edit me-1"></i>Update Car
+                                    </button>
+                                    <button type="button" class="btn btn-danger" id="delete-car-btn" disabled>
+                                        <i class="fas fa-trash me-1"></i>Delete Car
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="clear-form-btn">
+                                        <i class="fas fa-times me-1"></i>Clear
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Quick Status Update -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Quick Status Update</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row align-items-end">
+                                <div class="col-md-5 mb-3">
+                                    <label for="quick-car-select" class="form-label">Select a car to update:</label>
+                                    <select class="form-select" id="quick-car-select">
+                                        <option value="">Select a car...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-5 mb-3">
+                                    <label for="quick-status-select" class="form-label">Status</label>
+                                    <select class="form-select" id="quick-status-select">
+                                        <option value="available">Available</option>
+                                        <option value="rented">Rented</option>
+                                        <option value="maintenance">Maintenance</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <button type="button" class="btn btn-primary w-100" id="update-status-btn">
+                                        Update
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Manage Bookings Section -->
+                <section id="manage-bookings-section" class="admin-section d-none">
+                    <h2 class="mb-4"><i class="fas fa-calendar-check me-2"></i>Manage Bookings</h2>
+                    
+                    <!-- Quick Actions -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Quick Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-success" id="mark-returned-btn">
+                                    <i class="fas fa-check-circle me-1"></i>Mark as Returned
+                                </button>
+                                <button type="button" class="btn btn-danger" id="cancel-booking-btn">
+                                    <i class="fas fa-times-circle me-1"></i>Cancel Booking
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bookings Table -->
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Email</th>
+                                    <th>Car</th>
+                                    <th>Period</th>
+                                    <th>Payment Status</th>
+                                    <th>Rental Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-bookings-table">
+                                <!-- Bookings will be loaded here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Admin JavaScript -->
+    <script src="admin.js"></script>
+
+    <!-- React App -->
+    <script type="text/babel" src="react-app.js"></script>
+
+    <!-- Professional Upgrades Loader -->
+    <script src="assets/js/upgrade-loader.js"></script>
+</body>
+</html>

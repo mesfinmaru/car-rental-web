@@ -1,0 +1,209 @@
+/* Admin Panel Styles */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+}
+
+body {
+    padding-top: 70px;
+    background-color: #f8f9fa;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.card .icon {
+    opacity: 0.7;
+}
+
+/* Stats Cards */
+.card.bg-primary {
+    background: linear-gradient(135deg, #2c3e50, #4a6491);
+}
+
+.card.bg-success {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.card.bg-warning {
+    background: linear-gradient(135deg, #f39c12, #f1c40f);
+}
+
+.card.bg-info {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+/* Table Styles */
+.table th {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Car Cards in Admin */
+.car-card-admin {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.car-card-admin:hover {
+    border-color: var(--secondary-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.car-card-admin img {
+    height: 150px;
+    object-fit: cover;
+}
+
+.car-card-admin .card-body {
+    padding: 15px;
+}
+
+.car-card-admin .status-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-available {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-rented {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-maintenance {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Action Buttons */
+.btn-action {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+}
+
+/* Form Controls */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .d-md-flex {
+        flex-direction: column;
+    }
+    
+    .d-md-flex .btn {
+        margin-bottom: 5px;
+        width: 100%;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .input-group .form-select,
+    .input-group .btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+/* Custom Stat Cards */
+.bg-custom-blue { background-color: #007bff !important; }
+.bg-custom-green { background-color: #28a745 !important; }
+.bg-custom-cyan { background-color: #17a2b8 !important; }
+.bg-custom-orange { background-color: #ff8c00 !important; }
+
+.card-subtitle {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent for title */
+    font-weight: 600;
+}
+
+.card-text {
+    color: rgba(0, 0, 0, 0.8) !important; /* Darker for the actual numbers */
+}
+
+/* Section Toggling */
+.admin-section {
+    transition: opacity 0.3s ease;
+}
+
+.d-none {
+    display: none !important;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Accounts for fixed navbar + breathing room */
+}
+
+/* Navigation Active State */
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: var(--secondary-color) !important;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.navbar-nav .nav-link {
+    transition: all 0.3s ease;
+    margin: 0 5px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Loading Spinner */
+.spinner-border {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: middle;
+    border: 0.2em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border 0.75s linear infinite;
+}
+
+@keyframes spinner-border {
+    to { transform: rotate(360deg); }
+}
